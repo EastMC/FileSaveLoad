@@ -21,9 +21,10 @@ struct Student
 void SortByName(vector<Student>&);
 void SortByRating(vector<Student>&);
 size_t CountTwoness(const vector<Student>&);
+size_t CountExcellent(const vector<Student>&);
 
 
-//компараторы
+//предикаты-компараторы
 bool greaterString(Student s1, Student s2)
 {
 	return s1.Name.compare(s2.Name) < 0;
@@ -60,6 +61,15 @@ bool hasStudentBadMark(Student s1)
 	return p!=s1.Ratings.end();
 }
 
+bool hasRatingsExcellentMarks(unsigned rating)
+{
+	return rating >= 5;
+}
+
+bool hasStudentExcellentMarks(Student s1)
+{	
+	return count_if(s1.Ratings.begin(), s1.Ratings.end(), hasRatingsExcellentMarks) == s1.Ratings.size();
+}
 
 
 //функции по заданию
@@ -78,15 +88,20 @@ size_t CountTwoness(const vector<Student> &vec)
 	return count_if(vec.begin(), vec.end(), hasStudentBadMark);
 }
 
+size_t CountExcellent(const vector<Student> &vec)
+{
+	return count_if(vec.begin(), vec.end(), hasStudentExcellentMarks);
+}
+
 
 //основа
 int main()
 {
 	vector<Student> students;
 
-	vector<unsigned> marks1 = { 4,3,3,4 };
+	vector<unsigned> marks1 = { 5,5,5,5 };
 	vector<unsigned> marks2 = { 4,4,4,4 };
-	vector<unsigned> marks3 = { 4,5,5,5 };
+	vector<unsigned> marks3 = { 5,5,5,5 };
 
 	Student s1;
 	s1.Name = "AIvan";
@@ -114,7 +129,8 @@ int main()
 
 	//SortByName(students);
 	//SortByRating(students);
-	cout << "Bad marks students: " << CountTwoness(students) << endl;
+	//cout << "Bad marks students: " << CountTwoness(students) << endl;
+	cout << "Students with excellent marks: " << CountExcellent(students) << endl;
 
 	for (int i = 0; i < students.size(); i++)
 	{
