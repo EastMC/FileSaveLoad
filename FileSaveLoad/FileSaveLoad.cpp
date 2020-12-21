@@ -99,7 +99,7 @@ int main()
 {
 	vector<Student> students;
 
-	vector<unsigned> marks1 = { 5,5,5,5 };
+	vector<unsigned> marks1 = { 5,5,5,5,5,2 };
 	vector<unsigned> marks2 = { 4,4,4,4 };
 	vector<unsigned> marks3 = { 5,5,5,5 };
 
