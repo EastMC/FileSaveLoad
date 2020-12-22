@@ -2,26 +2,11 @@
 //
 
 #include "stdafx.h"
+#include "Header.h"
 #include <algorithm>
 #include <iostream>
-#include <string>
-#include <vector>
 #include <conio.h>
 using namespace std;
-
-struct Student
-{
-	string Name;
-	string GroupId;
-	vector<unsigned> Ratings;
-	vector<string> Subjects;
-};
-
-//прототипы
-void SortByName(vector<Student>&);
-void SortByRating(vector<Student>&);
-size_t CountTwoness(const vector<Student>&);
-size_t CountExcellent(const vector<Student>&);
 
 
 //предикаты-компараторы
@@ -47,7 +32,7 @@ bool greaterAverageRating(Student s1, Student s2)
 	}
 	average2 /= i;
 
-	return average1>average2;
+	return average1 > average2;
 }
 
 bool hasRatingsBadMark(unsigned rating)
@@ -69,6 +54,16 @@ bool hasRatingsExcellentMarks(unsigned rating)
 bool hasStudentExcellentMarks(Student s1)
 {	
 	return count_if(s1.Ratings.begin(), s1.Ratings.end(), hasRatingsExcellentMarks) == s1.Ratings.size();
+}
+
+bool hasStudentExcellentMathMark(Student s1)
+{
+	for (int i = 0; i < s1.Ratings.size() && i < s1.Subjects.size(); i++)
+	{
+		if (s1.Ratings[i] >= 5 && s1.Subjects[i].compare("Math") == 0)
+			return true;
+	}
+	return false;
 }
 
 
@@ -93,53 +88,108 @@ size_t CountExcellent(const vector<Student> &vec)
 	return count_if(vec.begin(), vec.end(), hasStudentExcellentMarks);
 }
 
+vector<Student> VectorMathExcellent(const vector<Student> &vec)
+{
+	vector<Student> excellentMathStudents(count_if(vec.begin(), vec.end(), hasStudentExcellentMathMark));
+	copy_if(vec.begin(), vec.end(), excellentMathStudents.begin(), hasStudentExcellentMathMark);
+	return excellentMathStudents;
+}
 
-//основа
+vector<string> GroupsId(const vector<Student> &vec)
+{
+	vector<string> allStudentGroups;
+	for (int i = 0; i < vec.size(); i++)
+	{
+		allStudentGroups.push_back(vec[i].GroupId);
+	}	
+
+	auto p = unique(allStudentGroups.begin(), allStudentGroups.end());
+	vector<string> result;
+	for (vector<string>::iterator v = allStudentGroups.begin(); v != p; v++)
+		result.push_back(*v);
+	return result;
+
+}
+
+vector<Group> Groups(const vector<Student> &vec)
+{
+	vector<Group> result;
+	vector<string> groupNames = GroupsId(vec);
+	for (int i = 0; i < groupNames.size(); i++)
+	{
+		Group newGroup;
+		vector<Student> studentsInOneGroup;
+		newGroup.Id = groupNames[i];
+		for (int j = 0; j < vec.size(); j++)
+		{
+			if (vec[j].GroupId.compare(groupNames[i]) == 0) studentsInOneGroup.push_back(vec[j]);
+		}
+		newGroup.Students = studentsInOneGroup;
+		result.push_back(newGroup);
+	}
+	return result;
+}
+
+
+
+
+//всякие проверки, отладки, по заданию не нужно
 int main()
 {
 	vector<Student> students;
 
-	vector<unsigned> marks1 = { 5,5,5,5,5,2 };
-	vector<unsigned> marks2 = { 4,4,4,4 };
+	vector<unsigned> marks1 = { 3,5,5,5 };
+	vector<string> subjects = { "Math","Russian","English","Physics" };
+	vector<unsigned> marks2 = { 5,4,4,4 };
 	vector<unsigned> marks3 = { 5,5,5,5 };
 
 	Student s1;
 	s1.Name = "AIvan";
-	s1.GroupId = "IU813";
+	s1.GroupId = "IU823";
 	s1.Ratings = marks1;
+	s1.Subjects = subjects;
 	Student s2;
 	s2.Name = "Ivan2";
-	s2.GroupId = "IU8132";
+	s2.GroupId = "IU813";
 	s2.Ratings = marks2;
+	s2.Subjects = subjects;
 	Student s3;
 	s3.Name = "BIvan2";
-	s3.GroupId = "IU8132";
+	s3.GroupId = "IU833";
 	s3.Ratings = marks3;
+	s3.Subjects = subjects;
 
 
 	students.push_back(s1);
 	students.push_back(s2);
 	students.push_back(s3);
 
-	for (int i = 0; i < students.size(); i++)
-	{
-		cout << students[i].Name << " ";
-	}
-	cout << endl;
+	//for (int i = 0; i < students.size(); i++)
+	//{
+	//	cout << students[i].Name << " ";
+	//}
+	//cout << endl;
 
 	//SortByName(students);
 	//SortByRating(students);
 	//cout << "Bad marks students: " << CountTwoness(students) << endl;
-	cout << "Students with excellent marks: " << CountExcellent(students) << endl;
-
-	for (int i = 0; i < students.size(); i++)
+	//cout << "Students with excellent marks: " << CountExcellent(students) << endl;
+	//vector<Student> v = VectorMathExcellent(students);
+	//vector<string> v = GroupsId(students);
+	vector<Group> v = Groups(students);
+	for (int i = 0; i < v.size(); i++)
 	{
-		cout << students[i].Name << " ";
+		cout << v[i].Id << endl;
+		for (int j = 0; j < v[i].Students.size(); j++)
+			cout << v[i].Students[j].Name << endl;
 	}
-
+	
+	//for (int i = 0; i < students.size(); i++)
+	//{
+	//	cout << students[i].Name << " ";
+	//}
 
 	getch();
-
 
 	return 0;
 }
