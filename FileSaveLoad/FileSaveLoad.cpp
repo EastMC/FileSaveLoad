@@ -150,7 +150,7 @@ int main()
 	s1.Subjects = subjects;
 	Student s2;
 	s2.Name = "Ivanov K.K.";
-	s2.GroupId = "IU8_13";
+	s2.GroupId = "IU8_15";
 	s2.Ratings = marks2;
 	s2.Subjects = subjects;
 	Student s3;
