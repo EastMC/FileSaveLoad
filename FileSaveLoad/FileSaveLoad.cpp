@@ -1,4 +1,4 @@
-// FileSaveLoad.cpp: определяет точку входа для консольного приложения.
+// FileSaveLoad.cpp: Г®ГЇГ°ГҐГ¤ГҐГ«ГїГҐГІ ГІГ®Г·ГЄГі ГўГµГ®Г¤Г  Г¤Г«Гї ГЄГ®Г­Г±Г®Г«ГјГ­Г®ГЈГ® ГЇГ°ГЁГ«Г®Г¦ГҐГ­ГЁГї.
 //
 
 #include "stdafx.h"
@@ -9,7 +9,7 @@
 using namespace std;
 
 
-//предикаты-компараторы
+//ГЇГ°ГҐГ¤ГЁГЄГ ГІГ»-ГЄГ®Г¬ГЇГ Г°Г ГІГ®Г°Г»
 bool greaterString(Student s1, Student s2)
 {
 	return s1.Name.compare(s2.Name) < 0;
@@ -67,7 +67,7 @@ bool hasStudentExcellentMathMark(Student s1)
 }
 
 
-//функции по заданию
+//ГґГіГ­ГЄГ¶ГЁГЁ ГЇГ® Г§Г Г¤Г Г­ГЁГѕ
 void SortByName(vector<Student> &vec)
 {
 	sort(vec.begin(), vec.end(), greaterString);
@@ -133,7 +133,7 @@ vector<Group> Groups(const vector<Student> &vec)
 
 
 
-//всякие проверки, отладки, по заданию не нужно
+//ГўГ±ГїГЄГЁГҐ ГЇГ°Г®ГўГҐГ°ГЄГЁ, Г®ГІГ«Г Г¤ГЄГЁ, ГЇГ® Г§Г Г¤Г Г­ГЁГѕ Г­ГҐ Г­ГіГ¦Г­Г®
 int main()
 {
 	vector<Student> students;
@@ -155,7 +155,7 @@ int main()
 	s2.Subjects = subjects;
 	Student s3;
 	s3.Name = "Sidorov G.G.";
-	s3.GroupId = "IU8_23";
+	s3.GroupId = "IU8_24";
 	s3.Ratings = marks3;
 	s3.Subjects = subjects;
 
