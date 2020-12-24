@@ -9,7 +9,7 @@
 using namespace std;
 
 
-//ïðåäèêàòû-êîìïàðàòîðû
+//компараторы-предикаты
 bool greaterString(Student s1, Student s2)
 {
 	return s1.Name.compare(s2.Name) < 0;
@@ -67,7 +67,7 @@ bool hasStudentExcellentMathMark(Student s1)
 }
 
 
-//ôóíêöèè ïî çàäàíèþ
+//целевые функции
 void SortByName(vector<Student> &vec)
 {
 	sort(vec.begin(), vec.end(), greaterString);
@@ -133,7 +133,7 @@ vector<Group> Groups(const vector<Student> &vec)
 
 
 
-//âñÿêèå ïðîâåðêè, îòëàäêè, ïî çàäàíèþ íå íóæíî
+//отладка, примеры, и т.д. 
 int main()
 {
 	vector<Student> students;
