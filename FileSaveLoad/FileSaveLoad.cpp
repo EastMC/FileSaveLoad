@@ -144,18 +144,18 @@ int main()
 	vector<unsigned> marks3 = { 5,5,5,5 };
 
 	Student s1;
-	s1.Name = "AIvan";
-	s1.GroupId = "IU823";
+	s1.Name = "Misyura M.S.";
+	s1.GroupId = "IU8_13";
 	s1.Ratings = marks1;
 	s1.Subjects = subjects;
 	Student s2;
-	s2.Name = "Ivan2";
-	s2.GroupId = "IU813";
+	s2.Name = "Ivanov K.K.";
+	s2.GroupId = "IU8_13";
 	s2.Ratings = marks2;
 	s2.Subjects = subjects;
 	Student s3;
-	s3.Name = "BIvan2";
-	s3.GroupId = "IU833";
+	s3.Name = "Sidorov G.G.";
+	s3.GroupId = "IU8_23";
 	s3.Ratings = marks3;
 	s3.Subjects = subjects;
 
@@ -181,7 +181,7 @@ int main()
 	{
 		cout << v[i].Id << endl;
 		for (int j = 0; j < v[i].Students.size(); j++)
-			cout << v[i].Students[j].Name << endl;
+			cout << "\t"<< v[i].Students[j].Name << endl;
 	}
 	
 	//for (int i = 0; i < students.size(); i++)
